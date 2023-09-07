@@ -9,8 +9,23 @@
 
 
 class Product:
-    pass  # код писать тут
+    def __init__(self, name: str, description: str, price_rub: float, weight_g: float):
+        self.name = name
+        self.description = description
+        self.price_rub = price_rub
+        self.weight_g = weight_g
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    product = Product(
+        name='Чай черный Greenfield English Edition',
+        description='Черный листовой чай',
+        price_rub=153.0,
+        weight_g=200.0,
+    )
+    print('Информация о продукте: {name}, {description}, {price_rub} руб., {weight_g} г'.format(
+        name=product.name,
+        description=product.description,
+        price_rub=product.price_rub,
+        weight_g=product.weight_g,
+    ))
