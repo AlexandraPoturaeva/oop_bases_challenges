@@ -14,8 +14,8 @@ class User:
     user_id: int
     name: str
 
-    def make_username_capitalized(self):
+    def make_username_capitalized(self) -> str:
         return self.username.capitalize()
 
-    def generate_short_user_description(self):
+    def generate_short_user_description(self) -> str:
         return f'User with id {self.user_id} has {self.username} username and {self.name} name'
