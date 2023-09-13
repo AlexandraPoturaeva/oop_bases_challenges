@@ -26,8 +26,12 @@ class Product:
 
 
 class AlcoholProduct(Product):
-    pass  # код писать тут
+    def is_available(self):
+        cur_time = datetime.now().hour
+
+        return super().is_available() if 5 <= cur_time < 23 else False
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    vodka = AlcoholProduct(title='5 озёр', price=100, stock_quantity=5)
+    print(vodka.is_available())
