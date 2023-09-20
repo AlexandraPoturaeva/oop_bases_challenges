@@ -19,4 +19,4 @@ class User:
     age: int
 
     def should_be_banned(self) -> bool:
-        return True if self.surname in SURNAMES_TO_BAN else False
+        return self.surname in SURNAMES_TO_BAN
