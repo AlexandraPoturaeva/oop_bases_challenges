@@ -1,3 +1,5 @@
+import dataclasses
+
 """
 Нам неоюходимо проверить, находится ли фамилия пользователя в списке запрещенных.
 
@@ -10,5 +12,11 @@
 SURNAMES_TO_BAN = ['Vaughn', 'Wilhelm', 'Santaros', 'Porter', 'Smith']
 
 
+@dataclasses.dataclass(kw_only=True, slots=True)
 class User:
-    pass  # код писать тут
+    name: str
+    surname: str
+    age: int
+
+    def should_be_banned(self) -> bool:
+        return self.surname in SURNAMES_TO_BAN

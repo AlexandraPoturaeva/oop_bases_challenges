@@ -22,9 +22,39 @@ class UserManager:
         return self.usernames
 
 
-# код писать тут
+class AdminManager(UserManager):
+    def ban_username(self, username_to_ban):
+        if username_to_ban in self.usernames:
+            self.usernames.remove(username_to_ban)
+        else:
+            print('Такого пользователя не существует')
+
+
+class SuperAdminManager(AdminManager):
+    def ban_all_users(self):
+        self.usernames.clear()
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    print('UserManager:')
+    user_manager = UserManager()
+    user_manager.add_user('Ben')
+    user_manager.add_user('Beth')
+    print(user_manager.get_users())
 
+    print('\nAdminManager:')
+    admin_manager = AdminManager()
+    admin_manager.add_user('Ben')
+    admin_manager.add_user('Beth')
+    admin_manager.ban_username('Ben')
+    admin_manager.ban_username('Alex')
+    print(admin_manager.get_users())
+
+    print('\nSuperAdminManager:')
+    super_admin_manager = SuperAdminManager()
+    super_admin_manager.add_user('Ben')
+    super_admin_manager.add_user('Beth')
+    super_admin_manager.ban_username('Ben')
+    super_admin_manager.ban_username('Alex')
+    super_admin_manager.ban_all_users()
+    print(super_admin_manager.get_users())
