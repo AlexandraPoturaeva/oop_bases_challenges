@@ -23,11 +23,21 @@ class Form:
 
 class AuthorizationFormMixin:
     def valid_form(self):
-        pass  # писать код тут
+        return super().valid_form() and self.username in USERNAMES_IN_DB
 
 
-# писать код тут
+class AuthorizationForm(AuthorizationFormMixin, Form):
+    def valid_form(self):
+        return super().valid_form()
 
 
 if __name__ == '__main__':
-    pass  # писать код тут
+    authorization_form__valid = AuthorizationForm('Alice_2023', '123456789')
+    authorization_form__invalid_username = AuthorizationForm('Alice_2024', '123456789')
+    authorization_form__invalid_password = AuthorizationForm('Alice_2024', '1234567')
+
+    print(
+        authorization_form__valid.valid_form(),
+        authorization_form__invalid_username.valid_form(),
+        authorization_form__invalid_password.valid_form()
+    )
