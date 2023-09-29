@@ -26,4 +26,4 @@ def generate_photos_limit_message():
 
 
 if __name__ == '__main__':
-   print(generate_photos_limit_message())
+    print(generate_photos_limit_message())
