@@ -26,18 +26,32 @@ class ItDepartmentEmployee(Employee):
 
 
 class AdminMixin:
-    def increase_salary(self, employee: Employee, amount: float):
-        employee.salary += amount
+    def increase_salary(self, amount: float):
+        self.salary += amount
 
 
 class SuperAdminMixin(AdminMixin):
-    def decrease_salary(self, employee: Employee, amount: float):
-        employee.salary -= amount
+    def decrease_salary(self, amount: float):
+        self.salary -= amount
 
 
-# код писать тут
+class Developer(ItDepartmentEmployee, SuperAdminMixin):
+    def __init__(self, name: str, surname: str, age: int, salary: float, program_lang: str):
+        super().__init__(name, surname, age, salary)
+        self.program_lang = program_lang
+
+    def get_info(self):
+        base_info = super().get_info()
+        return f'{base_info}, programming language - {self.program_lang}'
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    python_developer = Developer(name='Guido', surname='van Rossum', age=67, salary=500000, program_lang='Python')
 
+    print(python_developer.get_info())
+
+    python_developer.increase_salary(amount=20)
+    print(python_developer.get_info())
+
+    python_developer.decrease_salary(amount=20)
+    print(python_developer.get_info())

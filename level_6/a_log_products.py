@@ -10,17 +10,24 @@
 """
 
 
-class Product:
+class PrintLoggerMixin:
+    def log(self, message):
+        print(f'[LOG]: {message}')
+
+
+class Product():
     def __init__(self, title: str, price: float):
         self.title = title
         self.price = price
 
     def get_info(self):
+        self.log('Вывод информации о продукте')
         return f'Product {self.title} with price {self.price}'
 
 
-class PremiumProduct(Product):
+class PremiumProduct(PrintLoggerMixin, Product):
     def increase_price(self):
+        self.log('Увеличение цены')
         self.price *= 1.2
 
     def get_info(self):
@@ -28,8 +35,9 @@ class PremiumProduct(Product):
         return f'{base_info} (Premium)'
 
 
-class DiscountedProduct(Product):
+class DiscountedProduct(PrintLoggerMixin, Product):
     def increase_price(self):
+        self.log('Снижение цены')
         self.price /= 1.2
 
     def get_info(self):
@@ -38,5 +46,15 @@ class DiscountedProduct(Product):
 
 
 if __name__ == '__main__':
-    pass
+    cheese = PremiumProduct(title='Пармезан', price=2000)
+    milk = DiscountedProduct(title='Простоквашино', price=80)
+
+    milk.get_info()
+    milk.increase_price()
+
+    cheese.get_info()
+    cheese.increase_price()
+
+
+
 
